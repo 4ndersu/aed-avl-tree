@@ -167,7 +167,10 @@ Node* removeNode(Node *root, int key) {
                     aux->value = key;
                     printf("elemento trocado: %d !\n", key);
                     root->left = removeNode(root->left, key);
-                    return root;
+
+                    //recalculando altura e chamando balance
+                    root->heig = bigger(heigNode(root->left), heigNode(root->right)) + 1;
+                    return balance(root);
                 } else {
                     //remoção de nós com só um filho
                     Node *aux;
@@ -213,6 +216,9 @@ int main() {
     root = insert(root, 2);
     root = insert(root, 10);
     root = insert(root, 1);
+    root = insert(root, 3);
+    root = insert(root, 4);
+    root = insert(root, 5);
     printTree(root, 0);
 
     root = removeNode(root, 2);
