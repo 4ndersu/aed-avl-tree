@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
 
 typedef struct node {
     int value;
@@ -209,6 +211,86 @@ void printTree(Node *root, int level) {
     printf("%d\n", root->value);
 
     printTree(root->left, level + 1);
+}
+
+/*------------------------------------------------------------------------------
+ * Permutação de um Arranjo
+ *
+ * Implementan o algoritmo iterativo de Narayana Pandita para a permutação de
+ * um arranjo em ordem lexicográfica.
+ */
+
+ //Função auxiliar para trocar dois elementos de um arranjo
+void swap(int *a, int *b)
+{
+    const int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+//Função auxiliar para inverter um arranjo entre os índices inicio e fim
+void perm_invert(int *arr, int inicio, int fim)
+{
+    while (inicio < fim) {
+        swap(&arr[inicio], &arr[fim]);
+        inicio++;
+        fim--;
+    }
+}
+
+//Função que gera a próxima permutação lexicográfica de um arranjo
+bool perm_next(int *arr, int tamanho)
+{
+    int i = tamanho - 2;
+
+    while (i >= 0 && arr[i] >= arr[i + 1]) {
+        i--;
+    }
+
+    if (i < 0) {
+        return false;
+    }
+
+    int j = tamanho - 1;
+    while (arr[j] <= arr[i]) {
+        j--;
+    }
+
+    swap(&arr[i], &arr[j]);
+
+    perm_invert(arr, i + 1, tamanho - 1);
+
+    return true;
+}
+
+/*------------------------------------------------------------------------------
+ * Funções Auxiliares
+ */
+
+ //Função que imprime os elementos de um arranjo
+void data_print(const int * const data, const int N)
+{
+    printf("data: [ ");
+    for (int i = 0; i < N; i++) {
+        printf("%02d ", data[i]);
+    }
+    printf("]\n");
+}
+
+//Função que remove todas as ocorrências de um valor em um arranjo e retorna o novo tamanho do arranjo
+int arr_remove(int *arr, int N, int value)
+{
+    for (int i = 0; i < N; i++) {
+        if (arr[i] == value) {
+            for (int j = i; j < N - 1; j++) {
+                arr[j] = arr[j + 1];
+            }
+            N--;
+            i--;
+        }
+    }
+
+    return N;
 }
 
 int main() {
