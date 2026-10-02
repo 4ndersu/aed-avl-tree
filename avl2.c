@@ -306,5 +306,66 @@ int main() {
     root = removeNode(root, 2);
     printTree(root, 0);
 
+    /*    int DATA_INSERT[] = {1, 2, 3, 4, 5}; // DEVE estar ordenado!
+    int DATA_REMOVE[] = {1, 2, 3, 4, 5}; // DEVE estar ordenado!
+    const int N = 5; // tamanho dos arranjos de inserção e remoção
+
+    int *data_insert, *data_remove;
+
+    data_insert = (int *)malloc(sizeof(int) * N);
+    memcpy(data_insert, DATA_INSERT, sizeof(int) * N);
+    
+    do { // Loop de Inserção
+    
+        data_remove = (int *)malloc(sizeof(int) * N);
+        memcpy(data_remove, DATA_REMOVE, sizeof(int) * N);
+
+        do { // Loop de Remoção
+            BST *T = bst_alloc();
+
+            printf("--------------------------------------------\n");
+            printf("Dados para Insercao:\n\t");
+            data_print(data_insert, N);
+            
+            for (int i = 0; i < N; i++) {
+                printf("Inserindo: %02d\n", data_insert[i]);
+                Node *nd = node_alloc(data_insert[i]);
+                bst_insert(T, nd);
+                bst_print(T);
+                assert(bst_check(T->root, data_insert, i + 1));
+            }
+            
+            printf("Arvore apos todas as INSERCOES:\n");
+            bst_printTree(T->root);
+
+            printf("Dados para Remocao:\n\t");
+            data_print(data_remove, N);
+            int *arr = (int *)malloc(sizeof(int) * N);
+            int asize = N;
+            memcpy(arr, data_insert, sizeof(int) * asize);
+            
+            for (int i = 0; i < N; i++) {
+                printf("Removendo: %02d\n", data_remove[i]);
+                bst_delete(T, bst_search(T->root, data_remove[i]));
+                bst_print(T);
+                asize = arr_remove(arr, asize, data_remove[i]);
+                assert(bst_check(T->root, arr, asize));
+            }
+            
+            printf("Arvore apos todas as REMOCOES:\n");
+            bst_printTree(T->root);
+
+            free(arr);
+            bst_free(T);
+
+        } while (perm_next(data_remove, N));
+        
+        free(data_remove);
+
+    } while (perm_next(data_insert, N));
+    
+    free(data_insert); 
+    */
+
     return EXIT_SUCCESS;
 }
